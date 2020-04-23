@@ -91,6 +91,10 @@ InputBuffer* new_input_buffer() {
 
 void print_prompt() { printf("db > "); }
 
+void print_row(Row* row) {
+    printf("(%d, %s, %s)\n", row->id, row->username, row->email);
+}
+
 void read_input(InputBuffer* input_buffer) {
     ssize_t bytes_read = getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
 
