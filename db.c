@@ -40,6 +40,17 @@ typedef struct {
     ssize_t input_length;
 } InputBuffer;
 
+void* row_slot(Table* table, uint32_t row_num) {
+    uint32_t page_num = row_num / ROWS_PER_PAGE;
+    void* page = table->pages[page_num];
+    if (page == NULL) {
+        page = table->pages[page_num] = malloc(sizeof(PAGE_SIZE));
+    }
+    uint32_t row_offset = row_num % ROWS_PER_PAGE;
+    uint32_t byte_offset = row_offset * ROW_SIZE;
+    return page + byte_offset;
+}
+
 void serialize_row(Row* source, void* destination) {
     memcpy(destination + ID_OFFSET, &(source->id), ID_SIZE);
     memcpy(destination + USERNAME_OFFSET, &(source->username), USERNAME_SIZE);
