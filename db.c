@@ -71,6 +71,7 @@ typedef enum { STATEMENT_INSERT, STATEMENT_SELECT } StatementType;
 
 typedef struct {
     StatementType type;
+    Row row_to_insert;
 } Statement;
 
 MetaCommandResult do_meta_command(InputBuffer* input_buffer) {
