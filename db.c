@@ -192,6 +192,7 @@ ExecuteResult execute_statement(Statement* statement, Table* table) {
 }
 
 int main(int argc, char** argv) {
+    Table* table = new_table();
     InputBuffer* input_buffer = new_input_buffer();
     while (true) {
         print_prompt();
