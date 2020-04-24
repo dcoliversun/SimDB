@@ -49,9 +49,20 @@ typedef struct {
     ssize_t input_length;
 } InputBuffer;
 
-Table* new_table() {
-    Table* table = malloc(sizeof(Table));
-    table->num_rows = 0;
+Pager* pager_open(const char* filename) {
+    //                      R/W Mode   Create    User W    User R
+    int fd = open(filename, O_RDONLY | O_CREAT | S_IWUSR | S_IRUSR);
+    if (fd == -1) {
+        printf("Unable to open file.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    off_t file_length = lseek(fd, 0, SEEK_END);
+
+    Pager* pager = malloc(sizeof(Pager));
+    pager->file_descriptor = fd;
+    pager->file_length = file_length;
+
     for (uint32_t i = 0; i < TABLE_MAX_PAGES; ++i) {
         table->pages[i] = NULL;
     }
