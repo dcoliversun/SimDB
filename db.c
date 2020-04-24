@@ -147,12 +147,12 @@ void db_close(Table* table) {
     free(table);
 }
 
-void free_table(Table* table) {
-    for (uint32_t i = 0; i < TABLE_MAX_PAGES; ++i) {
-        free(table->pages[i]);
-    }
-    free(table);
-}
+//void free_table(Table* table) {
+//    for (uint32_t i = 0; i < TABLE_MAX_PAGES; ++i) {
+//        free(table->pages[i]);
+//    }
+//    free(table);
+//}
 
 void* get_page(Pager* pager, uint32_t page_num) {
     if (page_num > TABLE_MAX_PAGES) {
