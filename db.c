@@ -51,7 +51,7 @@ typedef struct {
 
 Pager* pager_open(const char* filename) {
     //                      R/W Mode   Create    User W    User R
-    int fd = open(filename, O_RDONLY | O_CREAT | S_IWUSR | S_IRUSR);
+    int fd = open(filename, O_RDWR | O_CREAT , S_IWUSR | S_IRUSR);
     if (fd == -1) {
         printf("Unable to open file.\n");
         exit(EXIT_FAILURE);
