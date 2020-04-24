@@ -102,6 +102,7 @@ Table* db_open(const char* filename) {
     return table;
 }
 
+void db_close(Table* table) {
 void free_table(Table* table) {
     for (uint32_t i = 0; i < TABLE_MAX_PAGES; ++i) {
         free(table->pages[i]);
