@@ -7,6 +7,12 @@
 #IncludeRegexTransform: 
 
 /Users/oliver_sun/simple_database/db.c
+errno.h
+-
+fcntl.h
+-
+unistd.h
+-
 stdio.h
 -
 stdlib.h
