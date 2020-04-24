@@ -91,6 +91,14 @@ void pager_flush(Pager* pager, uint32_t page_num, uint32_t size) {
     }
 }
 
+Table* db_open(const char* filename) {
+    Pager* pager = pager_open(filename);
+    uint32_t num_rows = pager->file_length / ROW_SIZE;
+
+    Table* table = malloc(sizeof(Table));
+    table->num_rows = num_rows;
+    table->pager = pager;
+
     return table;
 }
 
