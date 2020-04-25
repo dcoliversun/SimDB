@@ -213,6 +213,13 @@ void* cursor_value(Cursor* cursor) {
     return page + byte_offset;
 }
 
+void* cursor_advance(Cursor* cursor) {
+    cursor->row_num += 1;
+    if (cursor->row_num >= cursor->table->num_rows) {
+        cursor->end_of_table = true;
+    }
+}
+
 void serialize_row(Row* source, void* destination) {
     memcpy(destination + ID_OFFSET, &(source->id), ID_SIZE);
     strncpy(destination + USERNAME_OFFSET, source->username, USERNAME_SIZE);
