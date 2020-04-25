@@ -55,6 +55,14 @@ typedef struct {
     ssize_t input_length;
 } InputBuffer;
 
+Cursor* table_start(Table* table) {
+    Cursor* cursor = malloc(sizeof(Cursor));
+    cursor->table = table;
+    cursor->row_num = 0;
+    cursor->end_of_table = (table->num_rows == 0);
+    return cursor;
+}
+
 Pager* pager_open(const char* filename) {
     //                      R/W Mode   Create    User W    User R
     int fd = open(filename, O_RDWR | O_CREAT , S_IWUSR | S_IRUSR);
