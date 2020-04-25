@@ -63,6 +63,14 @@ Cursor* table_start(Table* table) {
     return cursor;
 }
 
+Cursor* table_end(Table* table) {
+    Cursor* cursor = malloc(sizeof(Cursor));
+    cursor->table = table;
+    cursor->row_num = table->num_rows;
+    cursor->end_of_table = true;
+    return cursor;
+}
+
 Pager* pager_open(const char* filename) {
     //                      R/W Mode   Create    User W    User R
     int fd = open(filename, O_RDWR | O_CREAT , S_IWUSR | S_IRUSR);
