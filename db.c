@@ -44,6 +44,12 @@ typedef struct {
 } Table;
 
 typedef struct {
+    Table* table;
+    uint32_t row_num;
+    bool end_of_table; // Indicates a position one past the last element
+} Cursor;
+
+typedef struct {
     char* buffer;
     size_t buffer_length;
     ssize_t input_length;
