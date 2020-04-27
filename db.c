@@ -172,6 +172,12 @@ Cursor* leaf_node_find(Table* table, uint32_t page_num, uint32_t key) {
     cursor->cell_num = min_index;
     return cursor;
 }
+
+NodeType get_node_type(void* node) {
+    uint8_t value = *((uint8_t*)(node + NODE_TYPE_OFFSET));
+    return (NodeType)value;
+}
+
 /*
  * Return the position of the given key.
  * If the key is not present, return the position
