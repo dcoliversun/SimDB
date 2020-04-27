@@ -178,6 +178,11 @@ NodeType get_node_type(void* node) {
     return (NodeType)value;
 }
 
+void set_node_type(void* node, NodeType type) {
+    uint8_t value = type;
+    *((uint8_t*)(node + NODE_TYPE_OFFSET)) = value;
+}
+
 /*
  * Return the position of the given key.
  * If the key is not present, return the position
