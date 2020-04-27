@@ -183,6 +183,11 @@ void set_node_type(void* node, NodeType type) {
     *((uint8_t*)(node + NODE_TYPE_OFFSET)) = value;
 }
 
+void initialize_leaf_node(void* node) {
+    set_node_type(node, NODE_LEAF);
+    *leaf_node_num_cells(node) = 0;
+}
+
 /*
  * Return the position of the given key.
  * If the key is not present, return the position
