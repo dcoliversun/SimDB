@@ -404,11 +404,11 @@ void leaf_node_split_and_insert(Cursor* cursor, uint32_t key, Row* value) {
 }
 
 void leaf_node_insert(Cursor* cursor, uint32_t key, Row* value) {
-    void* node =get_page(cursor->table->pager, cursor->page_num);
+    void* node = get_page(cursor->table->pager, cursor->page_num);
     uint32_t num_cells = *leaf_node_num_cells(node);
     if (num_cells >= LEAF_NODE_MAX_CELLS) {
-        printf("Need to implement splitting a leaf node.\n");
-        exit(EXIT_FAILURE);
+        leaf_node_split_and_insert(cursor, key, value);
+        return;
     }
 
     if (cursor->cell_num < num_cells) {
