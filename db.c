@@ -335,6 +335,11 @@ void deserialize_row(void* source, Row* destination) {
     memcpy(&(destination->email), source + EMAIL_OFFSET, EMAIL_SIZE);
 }
 
+/*
+ * Until we start recycling free pages, new pages will always
+ * go onto the end of the database file
+ */
+uint32_t get_unused_page_num(Pager* pager) { return pager->num_pages; }
 void leaf_node_split_and_insert(Cursor* cursor, uint32_t key, Row* value) {
     /*
      * Create a new node and move half the cells over.
