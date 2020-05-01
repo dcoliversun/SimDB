@@ -416,14 +416,6 @@ void db_close(Table* table) {
     free(table);
 }
 
-//void free_table(Table* table) {
-//    for (uint32_t i = 0; i < TABLE_MAX_PAGES; ++i) {
-//        free(table->pages[i]);
-//    }
-//    free(table);
-//}
-
-
 void* cursor_value(Cursor* cursor) {
     uint32_t page_num = cursor->page_num;
     void* page = get_page(cursor->table->pager, page_num);
