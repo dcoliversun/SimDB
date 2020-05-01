@@ -321,22 +321,6 @@ void initialize_internal_node(void* node) {
     *internal_node_num_keys(node) = 0;
 }
 
-/*
- * Return the position of the given key.
- * If the key is not present, return the position
- * where it should be inserted
- */
-Cursor* table_find(Table* table, uint32_t key) {
-    uint32_t root_page_num = table->root_page_num;
-    void* root_node = get_page(table->pager, root_page_num);
-    if (get_node_type(root_node) == NODE_LEAF) {
-        return leaf_node_find(table, root_page_num, key);
-    } else {
-        printf("Need to implement searching an internal node\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
 Pager* pager_open(const char* filename) {
     //                      R/W Mode   Create    User W    User R
     int fd = open(filename, O_RDWR | O_CREAT , S_IWUSR | S_IRUSR);
