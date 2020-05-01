@@ -180,7 +180,7 @@ void* get_page(Pager* pager, uint32_t page_num) {
     }
     if (pager->pages[page_num] == NULL) {
         // Cache Miss. Allocate memory and load from file.
-        void* page = malloc(sizeof(PAGE_SIZE));
+        void* page = malloc(PAGE_SIZE);
         uint32_t num_pages = pager->file_length / PAGE_SIZE;
 
         // We might save a partial page at the end of the file
