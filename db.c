@@ -271,6 +271,22 @@ Cursor* internal_node_find(Table* table, uint32_t page_num, uint32_t key) {
     }
 }
 
+/*
+ * Return the position of the given key.
+ * If the key is not present, return the position
+ * where it should be inserted
+ */
+Cursor* table_find(Table* table, uint32_t key) {
+    uint32_t root_page_num = table->root_page_num;
+    void* root_node = get_page(table->pager, root_page_num);
+
+    if (get_node_type(root_node) == NODE_LEAF) {
+        return leaf_node_find(table, root_page_num, key);
+    } else {
+        return internal_node_find(table, root_page_num, key);
+    }
+}
+
 void set_node_type(void* node, NodeType type) {
     uint8_t value = type;
     *((uint8_t*)(node + NODE_TYPE_OFFSET)) = value;
