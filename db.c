@@ -718,11 +718,14 @@ ExecuteResult execute_insert(Statement* statement, Table* table) {
 
     leaf_node_insert(cursor, row_to_insert->id, row_to_insert);
 
+    free(cursor);
+
     return EXECUTE_SUCCESS;
 }
 
 ExecuteResult execute_select(Statement* statement, Table* table) {
     Cursor* cursor = table_start(table);
+
     Row row;
     while (!(cursor->end_of_table)) {
         deserialize_row(cursor_value(cursor), &row);
