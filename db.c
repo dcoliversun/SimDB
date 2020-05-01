@@ -234,6 +234,29 @@ Cursor* leaf_node_find(Table* table, uint32_t page_num, uint32_t key) {
     return cursor;
 }
 
+uint32_t internal_node_find_child(void* node, uint32_t key) {
+    /*
+     * Return the index of the child which should contain
+     * the given key.
+     */
+    uint32_t num_keys = *internal_node_num_keys(node);
+
+    /* Binary search */
+    uint32_t min_index = 0;
+    uint32_t max_index = num_keys;
+
+    while (min_index != max_index) {
+        uint32_t index = (min_index + max_index) / 2;
+        uint32_t key_to_right = *internal_node_key(node, index);
+        if (key_to_right >= key) {
+            max_index = index;
+        } else {
+            min_index = index + 1;
+        }
+    }
+    return min_index;
+}
+
 void set_node_type(void* node, NodeType type) {
     uint8_t value = type;
     *((uint8_t*)(node + NODE_TYPE_OFFSET)) = value;
