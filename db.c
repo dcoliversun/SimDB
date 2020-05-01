@@ -422,7 +422,7 @@ void* cursor_value(Cursor* cursor) {
     return leaf_node_value(page, cursor->cell_num);
 }
 
-void* cursor_advance(Cursor* cursor) {
+void cursor_advance(Cursor* cursor) {
     uint32_t page_num = cursor->page_num;
     void* node = get_page(cursor->table->pager, page_num);
     cursor->cell_num += 1;
