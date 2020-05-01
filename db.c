@@ -131,7 +131,7 @@ uint32_t* internal_node_child(void* node, uint32_t child_num) {
 }
 
 uint32_t* internal_node_key(void* node, uint32_t key_num) {
-    return internal_node_cell(node, key_num) + INTERNAL_NODE_CHILD_SIZE;
+    return (void*)internal_node_cell(node, key_num) + INTERNAL_NODE_CHILD_SIZE;
 }
 
 NodeType get_node_type(void* node) {
