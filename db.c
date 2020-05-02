@@ -493,6 +493,11 @@ void create_new_root(Table* table, uint32_t right_child_page_num) {
     *node_parent(right_child) = table->root_page_num;
 }
 
+void update_internal_node_key(void* node, uint32_t old_key, uint32_t new_key) {
+    uint32_t old_child_index = internal_node_find_child(node, old_key);
+    *internal_node_key(node, old_child_index) = new_key;
+}
+
 }
 
 void leaf_node_split_and_insert(Cursor* cursor, uint32_t key, Row* value) {
